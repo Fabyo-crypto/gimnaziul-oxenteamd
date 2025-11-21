@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Virtuală - Gimnaziul Oxentea</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* Reset și variabile CSS */
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --secondary: #2ecc71;
+            --secondary-dark: #27ae60;
+            --accent: #e74c3c;
+            --accent-dark: #c0392b;
+            --dark: #2c3e50;
+            --darker: #1a252f;
+            --light: #ecf0f1;
+            --lighter: #f9f9f9;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-dark: 0 15px 40px rgba(0,0,0,0.2);
+            --transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --transition-slow: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --transition-fast: all 0.3s ease;
+            --border-radius: 20px;
+            --border-radius-small: 10px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        /* Animații CSS personalizate */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        @keyframes bookFlip {
+            0% { transform: perspective(1000px) rotateY(0deg); }
+            50% { transform: perspective(1000px) rotateY(10deg); }
+            100% { transform: perspective(1000px) rotateY(0deg); }
+        }
+
+        /* Header și navigație */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            box-shadow: var(--shadow);
+            animation: pulse 3s infinite;
+        }
+
+        .logo-text h1 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            font-weight: 800;
+        }
+
+        .logo-text span {
+            color: var(--primary);
+            position: relative;
+        }
+
+        .logo-text span:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background: var(--secondary);
+            bottom: -5px;
+            left: 0;
+            border-radius: 2px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav li {
+            margin-left: 2rem;
+            position: relative;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        nav a i {
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background: var(--primary);
+            transition: var(--transition);
+            border-radius: 10px;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a:hover:after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--primary);
+            color: white !important;
+            padding: 0.7rem 1.5rem !important;
+            border-radius: 50px;
+            transition: var(--transition) !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
+        }
+
+        .nav-cta:after {
+            display: none;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        /* Sectiuni generale */
+        section {
+            padding: 6rem 5%;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            color: var(--dark);
+            display: inline-block;
+            position: relative;
+            font-weight: 800;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 1.5rem auto 0;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        /* Hero Section pentru Biblioteca */
+        .library-hero {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .library-hero-content {
+            max-width: 900px;
+            z-index: 2;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .library-hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .library-hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: var(--secondary);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .btn:hover:before {
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.4);
+        }
+
+        .btn i {
+            margin-left: 8px;
+            transition: var(--transition);
+        }
+
+        .btn:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Categorii Biblioteca */
+        .library-categories {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 5rem;
+            margin: 4rem 0;
+            box-shadow: var(--shadow);
+            animation: fadeIn 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .library-categories:before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            top: -150px;
+            right: -150px;
+            opacity: 0.1;
+            animation: pulse 10s infinite;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .category-card {
+            background: var(--lighter);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .category-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--primary);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .category-card:hover:before {
+            width: 100%;
+            opacity: 0.1;
+        }
+
+        .category-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+            box-shadow: var(--shadow);
+            animation: pulse 3s infinite;
+        }
+
+        .category-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .category-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Cărți Recomandate */
+        .featured-books {
+            background: var(--lighter);
+            border-radius: var(--border-radius);
+            padding: 5rem;
+            margin: 4rem 0;
+            box-shadow: var(--shadow);
+            animation: fadeIn 1s ease-out 0.5s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-books:before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            border-radius: 50%;
+            bottom: -100px;
+            left: -100px;
+            opacity: 0.1;
+            animation: pulse 8s infinite;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .book-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .book-card:hover {
+            transform: translateY(-15px) rotate(2deg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            animation: bookFlip 2s ease;
+        }
+
+        .book-cover {
+            width: 150px;
+            height: 200px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+            transition: var(--transition);
+        }
+
+        .book-card:hover .book-cover {
+            transform: scale(1.1);
+        }
+
+        .book-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .book-author {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .book-desc {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .book-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #999;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Manuale Școlare */
+        .textbooks {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 5rem;
+            margin: 4rem 0;
+            box-shadow: var(--shadow);
+            animation: fadeIn 1s ease-out 1s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .textbooks:before {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            border-radius: 50%;
+            top: -75px;
+            right: -75px;
+            opacity: 0.1;
+            animation: pulse 7s infinite;
+        }
+
+        .textbooks-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .textbook-filter {
+            padding: 0.7rem 1.5rem;
+            background: var(--lighter);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .textbook-filter.active, .textbook-filter:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .textbooks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .textbook-card {
+            background: var(--lighter);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .textbook-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .textbook-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .textbook-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .textbook-info p {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .textbook-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .textbook-links a {
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius-small);
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .textbook-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        /* Resurse Video */
+        .video-resources {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border-radius: var(--border-radius);
+            padding: 5rem;
+            margin: 4rem 0;
+            box-shadow: var(--shadow-dark);
+            animation: fadeIn 1s ease-out 1.5s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-resources:before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -150px;
+            left: -150px;
+            animation: pulse 12s infinite;
+        }
+
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .video-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .video-card:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
+            top: 0;
+            left: -100%;
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .video-card:hover:before {
+            left: 0;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .video-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .video-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .video-card p {
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .video-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .video-link i {
+            margin-left: 8px;
+            transition: var(--transition);
+        }
+
+        .video-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Materiale Interactive */
+        .interactive-materials {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 5rem;
+            margin: 4rem 0;
+            box-shadow: var(--shadow);
+            animation: fadeIn 1s ease-out 2s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interactive-materials:before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+            border-radius: 50%;
+            bottom: -100px;
+            right: -100px;
+            opacity: 0.1;
+            animation: pulse 9s infinite;
+        }
+
+        .interactive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .interactive-card {
+            background: var(--lighter);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .interactive-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .interactive-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .interactive-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .interactive-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Căutare și Filtrare */
+        .search-section {
+            background: var(--lighter);
+            border-radius: var(--border-radius);
+            padding: 4rem;
+            margin: 4rem 0;
+            box-shadow: var(--shadow);
+            animation: fadeIn 1s ease-out 2.5s both;
+        }
+
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .search-box {
+            display: flex;
+            margin-bottom: 2rem;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius-small) 0 0 var(--border-radius-small);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .search-btn {
+            padding: 0 2rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0 var(--border-radius-small) var(--border-radius-small) 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-btn:hover {
+            background: var(--secondary);
+        }
+
+        .search-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .search-filter {
+            padding: 0.7rem 1.5rem;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-filter.active, .search-filter:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Statistici Biblioteca */
+        .library-stats {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border-radius: var(--border-radius);
+            padding: 5rem;
+            margin: 4rem 0;
+            box-shadow: var(--shadow-dark);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker);
+            color: white;
+            padding: 5rem 5% 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-wave {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .footer-wave svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 50px;
+        }
+
+        .footer-wave .shape-fill {
+            fill: white;
+        }
+
+        .footer-content {
+            max-width: 1800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            bottom: 0;
+            left: 0;
+            border-radius: 3px;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo span {
+            color: var(--primary);
+        }
+
+        .footer-about p {
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a i {
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .footer-newsletter p {
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .newsletter-form {
+            display: flex;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: none;
+            border-radius: var(--border-radius-small) 0 0 var(--border-radius-small);
+            font-size: 1rem;
+        }
+
+        .newsletter-btn {
+            padding: 0 1.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0 var(--border-radius-small) var(--border-radius-small) 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-btn:hover {
+            background: var(--secondary);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Elemente animate */
+        .animated-element {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .animated-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Buton scroll to top */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            font-size: 1.2rem;
+        }
+
+        .scroll-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+            animation: pulse 1s;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .library-hero h2 {
+                font-size: 3rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .library-hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            
+            .categories-grid, .books-grid, .textbooks-grid, .videos-grid, .interactive-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            nav {
+                width: 100%;
+                margin-top: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                display: none;
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+            
+            .library-hero {
+                height: 50vh;
+                margin-top: 100px;
+            }
+            
+            .library-hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .library-hero p {
+                font-size: 1.2rem;
+            }
+            
+            section {
+                padding: 4rem 5%;
+            }
+            
+            .library-categories, .featured-books, .textbooks, .video-resources, .interactive-materials, .search-section, .library-stats {
+                padding: 3rem;
+            }
+            
+            .textbook-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .library-hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .library-hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .library-categories, .featured-books, .textbooks, .video-resources, .interactive-materials, .search-section, .library-stats {
+                padding: 2rem;
+            }
+            
+            .categories-grid, .books-grid, .textbooks-grid, .videos-grid, .interactive-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-box {
+                flex-direction: column;
+            }
+            
+            .search-input {
+                border-radius: var(--border-radius-small);
+                margin-bottom: 1rem;
+            }
+            
+            .search-btn {
+                border-radius: var(--border-radius-small);
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">GO</div>
+                <div class="logo-text">
+                    <h1>Gimnaziul <span>Oxentea</span></h1>
+                </div>
+            </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Acasă</a></li>
+                    <li><a href="index.html#despre"><i class="fas fa-info-circle"></i> Despre noi</a></li>
+                    <li><a href="index.html#oferta"><i class="fas fa-book-open"></i> Oferta educațională</a></li>
+                    <li><a href="resurse.html"><i class="fas fa-folder-open"></i> Resurse</a></li>
+                    <li><a href="biblioteca.html" class="nav-cta"><i class="fas fa-book"></i> Biblioteca</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section pentru Biblioteca -->
+    <section class="library-hero">
+        <div class="library-hero-content">
+            <h2>Biblioteca Virtuală</h2>
+            <p>Descoperă o lume de cunoaștere cu resursele noastre educaționale digitale</p>
+            <a href="#categorii" class="btn">Explorează acum <i class="fas fa-arrow-down"></i></a>
+        </div>
+    </section>
+
+    <!-- Categorii Biblioteca -->
+    <section class="library-categories animated-element" id="categorii">
+        <div class="section-title">
+            <h2>Categorii de Resurse</h2>
+            <p class="section-subtitle">Găsește rapid resursele educaționale de care ai nevoie</p>
+        </div>
+        <div class="categories-grid">
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h3>Manuale Școlare</h3>
+                <p>Manualele aprobate de Ministerul Educației pentru toate disciplinele</p>
+                <a href="#manuale" class="btn">Accesează</a>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h3>Cărți Recomandate</h3>
+                <p>Literatură suplimentară recomandată pentru fiecare disciplină</p>
+                <a href="#carti" class="btn">Explorează</a>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h3>Resurse Video</h3>
+                <p>Lecții video, tutoriale și prezentări interactive</p>
+                <a href="#video" class="btn">Vezi resurse</a>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-puzzle-piece"></i>
+                </div>
+                <h3>Materiale Interactive</h3>
+                <p>Jocuri educative, quiz-uri și simulări interactive</p>
+                <a href="#interactive" class="btn">Începe să înveți</a>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <h3>Fișe de Lucru</h3>
+                <p>Fișe practice și exerciții pentru consolidarea cunoștințelor</p>
+                <a href="#fise" class="btn">Descarcă</a>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Resurse pentru Profesori</h3>
+                <p>Planuri de lecție și materiale didactice pentru educatori</p>
+                <a href="#profesori" class="btn">Accesează</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cărți Recomandate -->
+    <section class="featured-books animated-element" id="carti">
+        <div class="section-title">
+            <h2>Cărți Recomandate</h2>
+            <p class="section-subtitle">Selecția noastră de cărți esențiale pentru educație</p>
+        </div>
+        <div class="books-grid">
+            <div class="book-card">
+                <div class="book-cover">
+                    <i class="fas fa-atom"></i>
+                </div>
+                <h3>Științe pentru Gimnaziu</h3>
+                <div class="book-author">de Dr. Maria Popescu</div>
+                <div class="book-desc">O introducere captivantă în lumea științelor pentru elevii de gimnaziu.</div>
+                <div class="book-meta">
+                    <span><i class="fas fa-book"></i> 245 pagini</span>
+                    <span><i class="fas fa-star"></i> 4.8/5</span>
+                </div>
+                <a href="#" class="btn">Citește acum</a>
+            </div>
+            <div class="book-card">
+                <div class="book-cover">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h3>Matematica Distractivă</h3>
+                <div class="book-author">de Prof. Ion Ionescu</div>
+                <div class="book-desc">Abordează matematica într-un mod distractiv și accesibil pentru toți.</div>
+                <div class="book-meta">
+                    <span><i class="fas fa-book"></i> 180 pagini</span>
+                    <span><i class="fas fa-star"></i> 4.9/5</span>
+                </div>
+                <a href="#" class="btn">Citește acum</a>
+            </div>
+            <div class="book-card">
+                <div class="book-cover">
+                    <i class="fas fa-globe-europe"></i>
+                </div>
+                <h3>Geografie Interactivă</h3>
+                <div class="book-author">de Dr. Elena Vasilescu</div>
+                <div class="book-desc">Descoperă lumea prin hărți interactive și studii de caz captivante.</div>
+                <div class="book-meta">
+                    <span><i class="fas fa-book"></i> 320 pagini</span>
+                    <span><i class="fas fa-star"></i> 4.7/5</span>
+                </div>
+                <a href="#" class="btn">Citește acum</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Manuale Școlare -->
+    <section class="textbooks animated-element" id="manuale">
+        <div class="section-title">
+            <h2>Manuale Școlare</h2>
+            <p class="section-subtitle">Manualele aprobate pentru curriculumul național</p>
+        </div>
+        <div class="textbooks-filters">
+            <button class="textbook-filter active" data-filter="toate">Toate</button>
+            <button class="textbook-filter" data-filter="cls5">Clasa a V-a</button>
+            <button class="textbook-filter" data-filter="cls6">Clasa a VI-a</button>
+            <button class="textbook-filter" data-filter="cls7">Clasa a VII-a</button>
+            <button class="textbook-filter" data-filter="cls8">Clasa a VIII-a</button>
+        </div>
+        <div class="textbooks-grid">
+            <div class="textbook-card" data-category="cls5">
+                <div class="textbook-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <div class="textbook-info">
+                    <h3>Matematică - Clasa a V-a</h3>
+                    <p>Manual aprobat de Ministerul Educației. Ediția 2023-2024.</p>
+                    <div class="textbook-links">
+                        <a href="#"><i class="fas fa-eye"></i> Vezi online</a>
+                        <a href="#"><i class="fas fa-download"></i> Descarcă PDF</a>
+                    </div>
+                </div>
+            </div>
+            <div class="textbook-card" data-category="cls5">
+                <div class="textbook-icon">
+                    <i class="fas fa-language"></i>
+                </div>
+                <div class="textbook-info">
+                    <h3>Limba Română - Clasa a V-a</h3>
+                    <p>Manual complet cu exerciții și texte literare esențiale.</p>
+                    <div class="textbook-links">
+                        <a href="#"><i class="fas fa-eye"></i> Vezi online</a>
+                        <a href="#"><i class="fas fa-download"></i> Descarcă PDF</a>
+                    </div>
+                </div>
+            </div>
+            <div class="textbook-card" data-category="cls6">
+                <div class="textbook-icon">
+                    <i class="fas fa-flask"></i>
+                </div>
+                <div class="textbook-info">
+                    <h3>Biologie - Clasa a VI-a</h3>
+                    <p>Explorarea lumii vii cu experimente și observații practice.</p>
+                    <div class="textbook-links">
+                        <a href="#"><i class="fas fa-eye"></i> Vezi online</a>
+                        <a href="#"><i class="fas fa-download"></i> Descarcă PDF</a>
+                    </div>
+                </div>
+            </div>
+            <div class="textbook-card" data-category="cls7">
+                <div class="textbook-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="textbook-info">
+                    <h3>Fizică - Clasa a VII-a</h3>
+                    <p>Înțelegerea fenomenelor fizice prin experimente și aplicații.</p>
+                    <div class="textbook-links">
+                        <a href="#"><i class="fas fa-eye"></i> Vezi online</a>
+                        <a href="#"><i class="fas fa-download"></i> Descarcă PDF</a>
+                    </div>
+                </div>
+            </div>
+            <div class="textbook-card" data-category="cls8">
+                <div class="textbook-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <div class="textbook-info">
+                    <h3>Informatică - Clasa a VIII-a</h3>
+                    <p>Bazele programării și tehnologiilor informaționale moderne.</p>
+                    <div class="textbook-links">
+                        <a href="#"><i class="fas fa-eye"></i> Vezi online</a>
+                        <a href="#"><i class="fas fa-download"></i> Descarcă PDF</a>
+                    </div>
+                </div>
+            </div>
+            <div class="textbook-card" data-category="cls8">
+                <div class="textbook-icon">
+                    <i class="fas fa-history"></i>
+                </div>
+                <div class="textbook-info">
+                    <h3>Istorie - Clasa a VIII-a</h3>
+                    <p>Studiul istoriei moderne și contemporane a României.</p>
+                    <div class="textbook-links">
+                        <a href="#"><i class="fas fa-eye"></i> Vezi online</a>
+                        <a href="#"><i class="fas fa-download"></i> Descarcă PDF</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resurse Video -->
+    <section class="video-resources animated-element" id="video">
+        <div class="section-title">
+            <h2>Resurse Video</h2>
+            <p class="section-subtitle">Lecții video și tutoriale interactive pentru învățare</p>
+        </div>
+        <div class="videos-grid">
+            <div class="video-card">
+                <div class="video-icon">
+                    <i class="fas fa-atom"></i>
+                </div>
+                <h3>Științe Experimentale</h3>
+                <p>Serie de experimente științifice demonstrate și explicate pas cu pas.</p>
+                <a href="#" class="video-link">Vezi lecțiile <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="video-card">
+                <div class="video-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h3>Matematică Vizuală</h3>
+                <p>Explicații vizuale pentru concepte matematice complexe.</p>
+                <a href="#" class="video-link">Vezi lecțiile <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="video-card">
+                <div class="video-icon">
+                    <i class="fas fa-language"></i>
+                </div>
+                <h3>Gramatica Română</h3>
+                <p>Lecții interactive de gramatică și ortografie română.</p>
+                <a href="#" class="video-link">Vezi lecțiile <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Materiale Interactive -->
+    <section class="interactive-materials animated-element" id="interactive">
+        <div class="section-title">
+            <h2>Materiale Interactive</h2>
+            <p class="section-subtitle">Jocuri educative și activități interactive pentru învățare</p>
+        </div>
+        <div class="interactive-grid">
+            <div class="interactive-card">
+                <div class="interactive-icon">
+                    <i class="fas fa-puzzle-piece"></i>
+                </div>
+                <h3>Quiz-uri Educative</h3>
+                <p>Testează-ți cunoștințele cu quiz-uri interactive pe diverse materii.</p>
+                <a href="#" class="btn">Începe quiz</a>
+            </div>
+            <div class="interactive-card">
+                <div class="interactive-icon">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h3>Jocuri Educative</h3>
+                <p>Învață prin joc cu activități educative distractive și captivante.</p>
+                <a href="#" class="btn">Joacă acum</a>
+            </div>
+            <div class="interactive-card">
+                <div class="interactive-icon">
+                    <i class="fas fa-vr-cardboard"></i>
+                </div>
+                <h3>Simulări 3D</h3>
+                <p>Explorează concepte complexe prin simulări 3D interactive.</p>
+                <a href="#" class="btn">Explorează</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Căutare și Filtrare -->
+    <section class="search-section animated-element">
+        <div class="search-container">
+            <h2>Caută în Biblioteca Virtuală</h2>
+            <p>Găsește rapid resursele de care ai nevoie</p>
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Caută după titlu, autor sau materie...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="search-filters">
+                <button class="search-filter active">Toate</button>
+                <button class="search-filter">Manuale</button>
+                <button class="search-filter">Cărți</button>
+                <button class="search-filter">Video</button>
+                <button class="search-filter">Interactive</button>
+                <button class="search-filter">Fișe</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistici Biblioteca -->
+    <section class="library-stats animated-element">
+        <div class="section-title">
+            <h2>Biblioteca în Numere</h2>
+            <p class="section-subtitle">Resursele noastre educaționale într-o privire</p>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">1,250+</div>
+                <div class="stat-label">Resurse Educaționale</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Cărți Electronice</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">300+</div>
+                <div class="stat-label">Lecții Video</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">150+</div>
+                <div class="stat-label">Jocuri Educative</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-wave">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+        <div class="footer-content">
+            <div class="footer-column">
+                <div class="footer-logo">Gimnaziul <span>Oxentea</span></div>
+                <div class="footer-about">
+                    <p>O instituție de învățământ dedicată excelenței în educație, formarea tinerilor și dezvoltarea comunității.</p>
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Link-uri rapide</h3>
+                <ul class="footer-links">
+                    <li><a href="Gimnaziul Oxentea nr.2.html"><i class="fas fa-chevron-right"></i> Acasă</a></li>
+                    <li><a href="Gimnaziul Oxentea nr.2.html#despre"><i class="fas fa-chevron-right"></i> Despre noi</a></li>
+                    <li><a href="Gimnaziul Oxentea nr.2.html#oferta"><i class="fas fa-chevron-right"></i> Oferta educațională</a></li>
+                    <li><a href="resurse.html"><i class="fas fa-chevron-right"></i> Resurse</a></li>
+                    <li><a href="biblioteca virtuala.html"><i class="fas fa-chevron-right"></i> Biblioteca</a></li>
+                    <li><a href="profesori.html"><i class="fas fa-chalkboard-teacher"></i> Profesori</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Biblioteca Virtuală</h3>
+                <ul class="footer-links">
+                    <li><a href="#manuale"><i class="fas fa-chevron-right"></i> Manuale școlare</a></li>
+                    <li><a href="#carti"><i class="fas fa-chevron-right"></i> Cărți recomandate</a></li>
+                    <li><a href="#video"><i class="fas fa-chevron-right"></i> Resurse video</a></li>
+                    <li><a href="#interactive"><i class="fas fa-chevron-right"></i> Materiale interactive</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Căutare avansată</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <div class="footer-about">
+                    <p>Strada Principală, nr. 123, Oxentea</p>
+                    <p>Telefon: +40 123 456 789</p>
+                    <p>Email: contact@gimnaziuloxentea.ro</p>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 Gimnaziul Oxentea. Toate drepturile rezervate.
+        </div>
+    </footer>
+
+    <!-- Buton scroll to top -->
+    <div class="scroll-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <script>
+        // Animare la scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.animated-element');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Buton scroll to top
+            const scrollToTopBtn = document.querySelector('.scroll-to-top');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.add('active');
+                } else {
+                    scrollToTopBtn.classList.remove('active');
+                }
+            });
+            
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Navigație smooth
+            document.querySelectorAll('nav a, .footer-links a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    if (this.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        
+                        const targetId = this.getAttribute('href');
+                        const targetElement = document.querySelector(targetId);
+                        
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                            
+                            // Închidem meniul mobil dacă este deschis
+                            if (window.innerWidth <= 768) {
+                                document.querySelector('nav ul').classList.remove('active');
+                            }
+                        }
+                    }
+                });
+            });
+            
+            // Meniu mobil
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navMenu = document.querySelector('nav ul');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                mobileMenuBtn.innerHTML = navMenu.classList.contains('active') ? 
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Filtrare manuale
+            const textbookFilters = document.querySelectorAll('.textbook-filter');
+            const textbookCards = document.querySelectorAll('.textbook-card');
+            
+            textbookFilters.forEach(filter => {
+                filter.addEventListener('click', () => {
+                    // Eliminăm clasa active de la toate filtrele
+                    textbookFilters.forEach(f => f.classList.remove('active'));
+                    // Adăugăm clasa active la filtrul selectat
+                    filter.classList.add('active');
+                    
+                    const filterValue = filter.getAttribute('data-filter');
+                    
+                    textbookCards.forEach(card => {
+                        if (filterValue === 'toate' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'flex';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 10);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+            
+            // Căutare în bibliotecă
+            const searchInput = document.querySelector('.search-input');
+            const searchBtn = document.querySelector('.search-btn');
+            
+            searchBtn.addEventListener('click', function() {
+                if (searchInput.value.trim() !== '') {
+                    alert('Căutare pentru: ' + searchInput.value + '\nÎntr-o implementare reală, ați fi redirecționat către rezultatele căutării.');
+                } else {
+                    alert('Vă rugăm introduceți un termen de căutare.');
+                }
+            });
+            
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchBtn.click();
+                }
+            });
+            
+            // Filtre de căutare
+            const searchFilters = document.querySelectorAll('.search-filter');
+            
+            searchFilters.forEach(filter => {
+                filter.addEventListener('click', function() {
+                    searchFilters.forEach(f => f.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

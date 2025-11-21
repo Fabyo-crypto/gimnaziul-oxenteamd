@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#3498db">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Gimnaziul Oxentea">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="handheldfriendly" content="true">
+    <meta name="mobileoptimized" content="width">
+    <title>Gimnaziul Oxentea - Site Mobil Optimizat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2ecc71;
+            --accent: #e74c3c;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        /* Header optimizat pentru mobil */
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            padding: 0.8rem 1rem;
+            height: 70px;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .logo-text h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            color: var(--primary);
+        }
+
+        /* Meniu mobil îmbunătățit */
+        .mobile-menu-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-btn:active {
+            background: var(--light);
+        }
+
+        nav {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 999;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        nav.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 1rem;
+        }
+
+        nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        nav a {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            border-radius: 12px;
+            transition: var(--transition);
+            gap: 1rem;
+        }
+
+        nav a:active {
+            background: var(--primary);
+            color: white;
+            transform: scale(0.98);
+        }
+
+        nav a i {
+            font-size: 1.2rem;
+            width: 24px;
+        }
+
+        /* Butoane optimizate pentru touch */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            gap: 0.5rem;
+            min-height: 50px;
+            touch-action: manipulation;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+            background: var(--secondary);
+        }
+
+        /* Hero section optimizată */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 6rem 1.5rem 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        /* Secțiuni generale */
+        section {
+            padding: 4rem 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        /* Card-uri optimizate pentru touch */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            touch-action: manipulation;
+        }
+
+        .card:active {
+            transform: scale(0.98);
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        /* Swipe-able carousel */
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            margin: 2rem 0;
+            touch-action: pan-y;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            padding: 2rem;
+            background: white;
+            text-align: center;
+        }
+
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .carousel-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ddd;
+            transition: var(--transition);
+        }
+
+        .carousel-indicator.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+
+        /* Formulare optimizate */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: white;
+            -webkit-appearance: none;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        /* Footer optimizat */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 1.5rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:active {
+            background: var(--primary);
+            transform: scale(0.9);
+        }
+
+        /* Scroll personalizat pentru WebKit */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        /* Safe areas pentru notchi și gesture navigation */
+        @supports(padding: max(0px)) {
+            body, header {
+                padding-left: max(1.5rem, env(safe-area-inset-left));
+                padding-right: max(1.5rem, env(safe-area-inset-right));
+            }
+            
+            .hero {
+                padding-top: max(6rem, env(safe-area-inset-top));
+            }
+        }
+
+        /* Media queries pentru tabletă */
+        @media (min-width: 768px) {
+            .hero h2 {
+                font-size: 3rem;
+            }
+            
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            nav {
+                position: static;
+                transform: none;
+                opacity: 1;
+                background: transparent;
+                backdrop-filter: none;
+                width: auto;
+                box-shadow: none;
+            }
+            
+            nav ul {
+                display: flex;
+                gap: 1.5rem;
+                padding: 0;
+            }
+            
+            nav li {
+                margin-bottom: 0;
+            }
+            
+            nav a {
+                padding: 0.5rem 1rem;
+            }
+            
+            nav a:active {
+                background: transparent;
+                color: var(--primary);
+                transform: none;
+            }
+            
+            .mobile-menu-btn {
+                display: none;
+            }
+        }
+
+        /* Media queries pentru desktop */
+        @media (min-width: 1024px) {
+            .card-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            section {
+                padding: 6rem 2rem;
+            }
+            
+            .hero {
+                padding: 8rem 2rem 4rem;
+            }
+        }
+
+        /* Animări optimizate pentru performanță */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Stiluri pentru loading states */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* Toast notifications pentru mobil */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--dark);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            z-index: 1001;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">GO</div>
+                <div class="logo-text">
+                    <h1>Gimnaziul <span>Oxentea</span></h1>
+                </div>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#acasa"><i class="fas fa-home"></i> Acasă</a></li>
+                    <li><a href="#despre"><i class="fas fa-info-circle"></i> Despre</a></li>
+                    <li><a href="#profesori"><i class="fas fa-chalkboard-teacher"></i> Profesori</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="acasa">
+        <div class="hero-content">
+            <h2>Gimnaziul Oxentea</h2>
+            <p>Educație de calitate pentru viitorul tău</p>
+            <a href="#despre" class="btn">
+                Află mai multe
+                <i class="fas fa-arrow-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Despre Noi -->
+    <section id="despre">
+        <div class="section-title">
+            <h2>Despre Noi</h2>
+            <p>O școală modernă cu tradiție</p>
+        </div>
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>Educație Calitativă</h3>
+                <p>Oferim o educație de excelență adaptată cerințelor secolului XXI.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Profesori Dedicati</h3>
+                <p>Cadru didactic calificat și pasionat de educația tinerilor.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-laptop"></i>
+                </div>
+                <h3>Tehnologie Modernă</h3>
+                <p>Dotări moderne și resurse educaționale actualizate.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carousel Profesori -->
+    <section id="profesori">
+        <div class="section-title">
+            <h2>Profesorii Noștri</h2>
+            <p>O echipă de profesioniști dedicați</p>
+        </div>
+        <div class="carousel">
+            <div class="carousel-track" id="carouselTrack">
+                <div class="carousel-slide">
+                    <h3>Maria Popescu</h3>
+                    <p>Profesoară de Matematică</p>
+                    <p>15 ani experiență</p>
+                </div>
+                <div class="carousel-slide">
+                    <h3>Ion Ionescu</h3>
+                    <p>Profesor de Limba Română</p>
+                    <p>12 ani experiență</p>
+                </div>
+                <div class="carousel-slide">
+                    <h3>Elena Vasilescu</h3>
+                    <p>Profesoară de Engleză</p>
+                    <p>10 ani experiență</p>
+                </div>
+            </div>
+            <div class="carousel-indicators" id="carouselIndicators">
+                <div class="carousel-indicator active"></div>
+                <div class="carousel-indicator"></div>
+                <div class="carousel-indicator"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="section-title">
+            <h2>Contact</h2>
+            <p>Ia legătura cu noi</p>
+        </div>
+        <form id="contactForm">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Numele tău" required>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" placeholder="Mesajul tău" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn" style="width: 100%;">
+                Trimite mesaj
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="logo">
+                <div class="logo-icon">GO</div>
+                <div class="logo-text">
+                    <h1>Gimnaziul <span>Oxentea</span></h1>
+                </div>
+            </div>
+            <p>Educație de calitate pentru viitorul tău</p>
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p>&copy; 2023 Gimnaziul Oxentea. Toate drepturile rezervate.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // Detectare dispozitiv și optimizări specifice
+        const isMobile = {
+            Android: function() {
+                return navigator.userAgent.match(/Android/i);
+            },
+            iOS: function() {
+                return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+            },
+            any: function() {
+                return (isMobile.Android() || isMobile.iOS());
+            }
+        };
+
+        // Meniu mobil
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+
+        function toggleMobileMenu() {
+            mainNav.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.className = mainNav.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+        // Închidere meniu la click în afara
+        document.addEventListener('click', (e) => {
+            if (!mainNav.contains(e.target) && !mobileMenuBtn.contains(e.target) && mainNav.classList.contains('active')) {
+                toggleMobileMenu();
+            }
+        });
+
+        // Swipe carousel
+        const carouselTrack = document.getElementById('carouselTrack');
+        const carouselIndicators = document.getElementById('carouselIndicators').children;
+        let currentSlide = 0;
+        let startX = 0;
+        let currentX = 0;
+        let isDragging = false;
+
+        function updateCarousel() {
+            carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update indicators
+            Array.from(carouselIndicators).forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Touch events pentru carousel
+        carouselTrack.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+        });
+
+        carouselTrack.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            currentX = e.touches[0].clientX;
+            const diff = startX - currentX;
+            
+            // Previne scroll-ul vertical când se face swipe orizontal
+            if (Math.abs(diff) > 10) {
+                e.preventDefault();
+            }
+        });
+
+        carouselTrack.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            
+            const diff = startX - currentX;
+            const swipeThreshold = 50;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0 && currentSlide < carouselIndicators.length - 1) {
+                    // Swipe left - next slide
+                    currentSlide++;
+                } else if (diff < 0 && currentSlide > 0) {
+                    // Swipe right - previous slide
+                    currentSlide--;
+                }
+                updateCarousel();
+            }
+            
+            isDragging = false;
+        });
+
+        // Auto-advance carousel
+        setInterval(() => {
+            if (!isDragging) {
+                currentSlide = (currentSlide + 1) % carouselIndicators.length;
+                updateCarousel();
+            }
+        }, 5000);
+
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        const toast = document.getElementById('toast');
+
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Simulare trimitere formular
+            contactForm.classList.add('loading');
+            
+            setTimeout(() => {
+                contactForm.classList.remove('loading');
+                contactForm.reset();
+                showToast('Mesajul a fost trimis cu succes!');
+            }, 2000);
+        });
+
+        // Optimizări pentru iOS
+        if (isMobile.iOS()) {
+            // Adaugă padding suplimentar pentru safe areas
+            document.documentElement.style.setProperty('--safe-area-top', 'env(safe-area-inset-top)');
+            document.documentElement.style.setProperty('--safe-area-bottom', 'env(safe-area-inset-bottom)');
+            
+            // Previne bounce-ul pe iOS
+            document.body.style.overscrollBehavior = 'none';
+        }
+
+        // Gesture prevention pentru refresh pull-to-refresh
+        let touchStartY = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        document.addEventListener('touchmove', (e) => {
+            const touchY = e.touches[0].clientY;
+            const diff = touchY - touchStartY;
+            
+            // Previne pull-to-refresh când scroll-ul este în partea de sus
+            if (window.scrollY === 0 && diff > 0) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        // Loading states optimizate
+        document.addEventListener('DOMContentLoaded', () => {
+            // Ascunde loading indicator-ul nativ
+            if ('standalone' in navigator || !window.matchMedia('(display-mode: browser)').matches) {
+                // Este în modul standalone (PWA)
+                document.body.classList.add('standalone');
+            }
+        });
+
+        // Performance optimizations
+        let lastScrollTop = 0;
+        const header = document.querySelector('header');
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scroll down - ascunde header-ul
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                // Scroll up - afișează header-ul
+                header.style.transform = 'translateY(0)';
+            }
+            
+            lastScrollTop = scrollTop;
+        }, { passive: true });
+
+        // Fast click implementation
+        document.addEventListener('touchstart', function() {}, {passive: true});
+
+        // Preload critical resources
+        const criticalImages = [
+            'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
+        ];
+
+        criticalImages.forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+
+        console.log('Site optimizat pentru dispozitive mobile: ' + (isMobile.any() ? 'DA' : 'NU'));
+    </script>
+</body>
+</html>

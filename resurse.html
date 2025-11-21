@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documente Școlare - Gimnaziul Oxentea</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* Reset și variabile CSS */
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --secondary: #2ecc71;
+            --secondary-dark: #27ae60;
+            --accent: #e74c3c;
+            --accent-dark: #c0392b;
+            --dark: #2c3e50;
+            --darker: #1a252f;
+            --light: #ecf0f1;
+            --lighter: #f9f9f9;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-dark: 0 15px 40px rgba(0,0,0,0.2);
+            --transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --transition-slow: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --transition-fast: all 0.3s ease;
+            --border-radius: 20px;
+            --border-radius-small: 10px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        /* Animații CSS personalizate */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        /* Header și navigație */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            box-shadow: var(--shadow);
+            animation: pulse 3s infinite;
+        }
+
+        .logo-text h1 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            font-weight: 800;
+        }
+
+        .logo-text span {
+            color: var(--primary);
+            position: relative;
+        }
+
+        .logo-text span:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background: var(--secondary);
+            bottom: -5px;
+            left: 0;
+            border-radius: 2px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav li {
+            margin-left: 2rem;
+            position: relative;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        nav a i {
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background: var(--primary);
+            transition: var(--transition);
+            border-radius: 10px;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a:hover:after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--primary);
+            color: white !important;
+            padding: 0.7rem 1.5rem !important;
+            border-radius: 50px;
+            transition: var(--transition) !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
+        }
+
+        .nav-cta:after {
+            display: none;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        /* Sectiuni generale */
+        section {
+            padding: 6rem 5%;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            color: var(--dark);
+            display: inline-block;
+            position: relative;
+            font-weight: 800;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 1.5rem auto 0;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        /* Hero Section pentru Resurse */
+        .resources-hero {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .resources-hero-content {
+            max-width: 900px;
+            z-index: 2;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .resources-hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .resources-hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: var(--secondary);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .btn:hover:before {
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.4);
+        }
+
+        .btn i {
+            margin-left: 8px;
+            transition: var(--transition);
+        }
+
+        .btn:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Categorii Resurse */
+        .resources-categories {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 5rem;
+            margin: 4rem 0;
+            box-shadow: var(--shadow);
+            animation: fadeIn 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resources-categories:before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            top: -150px;
+            right: -150px;
+            opacity: 0.1;
+            animation: pulse 10s infinite;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .category-card {
+            background: var(--lighter);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .category-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--primary);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .category-card:hover:before {
+            width: 100%;
+            opacity: 0.1;
+        }
+
+        .category-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+            box-shadow: var(--shadow);
+            animation: pulse 3s infinite;
+        }
+
+        .category-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .category-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Documente Școlare */
+        .documents {
+            background: var(--lighter);
+            border-radius: var(--border-radius);
+            padding: 5rem;
+            margin: 4rem 0;
+            box-shadow: var(--shadow);
+            animation: fadeIn 1s ease-out 0.5s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .documents:before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            border-radius: 50%;
+            bottom: -100px;
+            left: -100px;
+            opacity: 0.1;
+            animation: pulse 8s infinite;
+        }
+
+        .documents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .document-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .document-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--primary);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .document-card:hover:before {
+            width: 100%;
+            opacity: 0.1;
+        }
+
+        .document-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .document-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: var(--shadow);
+            animation: pulse 3s infinite;
+        }
+
+        .document-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .document-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .document-links {
+            list-style: none;
+        }
+
+        .document-links li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .document-links li:last-child {
+            border-bottom: none;
+        }
+
+        .document-links a {
+            color: var(--dark);
+            text-decoration: none;
+            transition: var(--transition);
+            flex: 1;
+        }
+
+        .document-links a:hover {
+            color: var(--primary);
+        }
+
+        .document-links .file-size {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .download-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius-small);
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .download-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        /* Calendar Școlar */
+        .calendar {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 5rem;
+            margin: 4rem 0;
+            box-shadow: var(--shadow);
+            animation: fadeIn 1s ease-out 1s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calendar:before {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            border-radius: 50%;
+            top: -75px;
+            right: -75px;
+            opacity: 0.1;
+            animation: pulse 7s infinite;
+        }
+
+        .calendar-container {
+            display: flex;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .calendar-image {
+            flex: 1;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-dark);
+        }
+
+        .calendar-image img {
+            width: 100%;
+            height: auto;
+            transition: var(--transition);
+        }
+
+        .calendar-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .calendar-events {
+            flex: 1;
+        }
+
+        .calendar-events h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+
+        .events-list {
+            list-style: none;
+        }
+
+        .event-item {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--lighter);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            border-left: 5px solid var(--primary);
+        }
+
+        .event-item:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow);
+        }
+
+        .event-date {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .event-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .event-desc {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Orar */
+        .schedule {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border-radius: var(--border-radius);
+            padding: 5rem;
+            margin: 4rem 0;
+            box-shadow: var(--shadow-dark);
+            animation: fadeIn 1s ease-out 1.5s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .schedule:before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -150px;
+            left: -150px;
+            animation: pulse 12s infinite;
+        }
+
+        .schedule-container {
+            margin-top: 3rem;
+            overflow-x: auto;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        .schedule-table th, .schedule-table td {
+            padding: 1.2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .schedule-table th {
+            background: rgba(255, 255, 255, 0.2);
+            font-weight: 600;
+        }
+
+        .schedule-table tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .schedule-table tr:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Portal Elev/Părinte */
+        .portal {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 5rem;
+            margin: 4rem 0;
+            box-shadow: var(--shadow);
+            animation: fadeIn 1s ease-out 2s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portal:before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+            border-radius: 50%;
+            bottom: -100px;
+            right: -100px;
+            opacity: 0.1;
+            animation: pulse 9s infinite;
+        }
+
+        .portal-content {
+            display: flex;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .portal-info {
+            flex: 1;
+        }
+
+        .portal-info h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .portal-info p {
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+
+        .portal-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .portal-features li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .portal-features li i {
+            color: var(--secondary);
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+
+        .portal-login {
+            flex: 1;
+            background: var(--lighter);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .portal-login h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius-small);
+            font-size: 1rem;
+            transition: var(--transition);
+            background: white;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+
+        .remember-me input {
+            margin-right: 0.5rem;
+        }
+
+        .forgot-password {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .forgot-password:hover {
+            color: var(--secondary);
+        }
+
+        /* Biblioteca Virtuală */
+        .library {
+            background: var(--lighter);
+            border-radius: var(--border-radius);
+            padding: 4rem;
+            margin: 4rem 0;
+            box-shadow: var(--shadow);
+            animation: fadeIn 1s ease-out 2.5s both;
+        }
+
+        .library-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .library-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .library-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .library-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .library-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .library-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker);
+            color: white;
+            padding: 5rem 5% 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-wave {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .footer-wave svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 50px;
+        }
+
+        .footer-wave .shape-fill {
+            fill: white;
+        }
+
+        .footer-content {
+            max-width: 1800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            bottom: 0;
+            left: 0;
+            border-radius: 3px;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo span {
+            color: var(--primary);
+        }
+
+        .footer-about p {
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a i {
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .footer-newsletter p {
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .newsletter-form {
+            display: flex;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: none;
+            border-radius: var(--border-radius-small) 0 0 var(--border-radius-small);
+            font-size: 1rem;
+        }
+
+        .newsletter-btn {
+            padding: 0 1.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0 var(--border-radius-small) var(--border-radius-small) 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-btn:hover {
+            background: var(--secondary);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Elemente animate */
+        .animated-element {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .animated-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Buton scroll to top */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            font-size: 1.2rem;
+        }
+
+        .scroll-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+            animation: pulse 1s;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .resources-hero h2 {
+                font-size: 3rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+            
+            .calendar-container, .portal-content {
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .calendar-container, .portal-content {
+                flex-direction: column;
+            }
+            
+            .resources-hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            
+            .categories-grid, .documents-grid, .library-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            nav {
+                width: 100%;
+                margin-top: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                display: none;
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+            
+            .resources-hero {
+                height: 50vh;
+                margin-top: 100px;
+            }
+            
+            .resources-hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .resources-hero p {
+                font-size: 1.2rem;
+            }
+            
+            section {
+                padding: 4rem 5%;
+            }
+            
+            .resources-categories, .documents, .calendar, .schedule, .portal, .library {
+                padding: 3rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .resources-hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .resources-hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .resources-categories, .documents, .calendar, .schedule, .portal, .library {
+                padding: 2rem;
+            }
+            
+            .categories-grid, .documents-grid, .library-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .schedule-container {
+                overflow-x: scroll;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">GO</div>
+                <div class="logo-text">
+                    <h1>Gimnaziul <span>Oxentea</span></h1>
+                </div>
+            </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Acasă</a></li>
+                    <li><a href="index.html#despre"><i class="fas fa-info-circle"></i> Despre noi</a></li>
+                    <li><a href="index.html#oferta"><i class="fas fa-book-open"></i> Oferta educațională</a></li>
+                    <li><a href="index.html#profesori"><i class="fas fa-chalkboard-teacher"></i> Profesori</a></li>
+                    <li><a href="index.html#activitati"><i class="fas fa-running"></i> Activități</a></li>
+                    <li><a href="index.html#galerie"><i class="fas fa-images"></i> Galerie</a></li>
+                    <li><a href="resurse.html" class="nav-cta"><i class="fas fa-folder-open"></i> Resurse</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section pentru Resurse -->
+    <section class="resources-hero">
+        <div class="resources-hero-content">
+            <h2>Resurse Școlare</h2>
+            <p>Toate documentele și resursele necesare pentru elevii și părinții Gimnaziului Oxentea</p>
+            <a href="#documente" class="btn">Explorează resursele <i class="fas fa-arrow-down"></i></a>
+        </div>
+    </section>
+
+    <!-- Categorii Resurse -->
+    <section class="resources-categories animated-element" id="categorii">
+        <div class="section-title">
+            <h2>Categorii de Resurse</h2>
+            <p class="section-subtitle">Găsește rapid resursele de care ai nevoie</p>
+        </div>
+        <div class="categories-grid">
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h3>Documente Școlare</h3>
+                <p>Regulamente, formulare și documente oficiale ale școlii</p>
+                <a href="#documente" class="btn">Vezi documente</a>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <h3>Calendar Școlar</h3>
+                <p>Programări, vacanțe și evenimente importante</p>
+                <a href="#calendar" class="btn">Vezi calendar</a>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>Orarul Orelor</h3>
+                <p>Programul orelor pentru toate clasele</p>
+                <a href="#orar" class="btn">Vezi orar</a>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <h3>Portal Elev/Părinte</h3>
+                <p>Acces la note, absențe și comunicări</p>
+                <a href="portal.html" class="btn">Accesează portal</a>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h3>Biblioteca Virtuală</h3>
+                <p>Resurse educaționale și materiale de studiu</p>
+                <a href="#biblioteca" class="btn">Explorează biblioteca</a>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-download"></i>
+                </div>
+                <h3>Descărcări</h3>
+                <p>Toate fișierele disponibile pentru descărcare</p>
+                <a href="#descarcari" class="btn">Vezi descărcări</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documente Școlare -->
+    <section class="documents animated-element" id="documente">
+        <div class="section-title">
+            <h2>Documente Școlare</h2>
+            <p class="section-subtitle">Documente oficiale și formulare necesare</p>
+        </div>
+        <div class="documents-grid">
+            <div class="document-card">
+                <div class="document-icon">
+                    <i class="fas fa-gavel"></i>
+                </div>
+                <h3>Regulamente</h3>
+                <p>Regulamentele interne ale școlii și proceduri</p>
+                <ul class="document-links">
+                    <li>
+                        <a href="#">Regulamentul de organizare și funcționare</a>
+                        <span class="file-size">(PDF, 245KB)</span>
+                        <button class="download-btn"><i class="fas fa-download"></i></button>
+                    </li>
+                    <li>
+                        <a href="#">Regulamentul de disciplină</a>
+                        <span class="file-size">(PDF, 180KB)</span>
+                        <button class="download-btn"><i class="fas fa-download"></i></button>
+                    </li>
+                    <li>
+                        <a href="#">Regulamentul de evaluare</a>
+                        <span class="file-size">(PDF, 210KB)</span>
+                        <button class="download-btn"><i class="fas fa-download"></i></button>
+                    </li>
+                </ul>
+            </div>
+            <div class="document-card">
+                <div class="document-icon">
+                    <i class="fas fa-file-signature"></i>
+                </div>
+                <h3>Formulare</h3>
+                <p>Formulare oficiale pentru diverse cereri</p>
+                <ul class="document-links">
+                    <li>
+                        <a href="#">Cerere de înscriere</a>
+                        <span class="file-size">(DOC, 45KB)</span>
+                        <button class="download-btn"><i class="fas fa-download"></i></button>
+                    </li>
+                    <li>
+                        <a href="#">Cerere de transfer</a>
+                        <span class="file-size">(DOC, 42KB)</span>
+                        <button class="download-btn"><i class="fas fa-download"></i></button>
+                    </li>
+                    <li>
+                        <a href="#">Cerere de adeverință</a>
+                        <span class="file-size">(DOC, 38KB)</span>
+                        <button class="download-btn"><i class="fas fa-download"></i></button>
+                    </li>
+                </ul>
+            </div>
+            <div class="document-card">
+                <div class="document-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Rapoarte și Planuri</h3>
+                <p>Rapoarte anuale și planuri de activitate</p>
+                <ul class="document-links">
+                    <li>
+                        <a href="#">Raport anual de activitate</a>
+                        <span class="file-size">(PDF, 1.2MB)</span>
+                        <button class="download-btn"><i class="fas fa-download"></i></button>
+                    </li>
+                    <li>
+                        <a href="#">Plan școlar de activități</a>
+                        <span class="file-size">(PDF, 890KB)</span>
+                        <button class="download-btn"><i class="fas fa-download"></i></button>
+                    </li>
+                    <li>
+                        <a href="#">Plan de îmbunătățire</a>
+                        <span class="file-size">(PDF, 750KB)</span>
+                        <button class="download-btn"><i class="fas fa-download"></i></button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calendar Școlar -->
+    <section class="calendar animated-element" id="calendar">
+        <div class="section-title">
+            <h2>Calendar Școlar</h2>
+            <p class="section-subtitle">Evenimente importante și perioade de vacanță</p>
+        </div>
+        <div class="calendar-container">
+            <div class="calendar-image">
+                <!-- Imagine placeholder -->
+                <div style="width: 100%; height: 400px; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: bold;">Calendar Școlar 2023-2024</div>
+            </div>
+            <div class="calendar-events">
+                <h3>Evenimente importante</h3>
+                <ul class="events-list">
+                    <li class="event-item">
+                        <div class="event-date"><i class="fas fa-calendar-day"></i> 11 Septembrie 2023</div>
+                        <div class="event-title">Începutul anului școlar</div>
+                        <div class="event-desc">Ceremonia de deschidere a noului an școlar</div>
+                    </li>
+                    <li class="event-item">
+                        <div class="event-date"><i class="fas fa-calendar-day"></i> 23-27 Octombrie 2023</div>
+                        <div class="event-title">Săptămâna evaluării</div>
+                        <div class="event-desc">Evaluare națională pentru clasele a VIII-a</div>
+                    </li>
+                    <li class="event-item">
+                        <div class="event-date"><i class="fas fa-calendar-day"></i> 23 Decembrie 2023 - 7 Ianuarie 2024</div>
+                        <div class="event-title">Vacanța de iarnă</div>
+                        <div class="event-desc">Vacanță de 2 săptămâni pentru sărbători</div>
+                    </li>
+                    <li class="event-item">
+                        <div class="event-date"><i class="fas fa-calendar-day"></i> 15-19 Aprilie 2024</div>
+                        <div class="event-title">Săptămâna olimpiadelor școlare</div>
+                        <div class="event-desc">Competiții școlare în diverse discipline</div>
+                    </li>
+                    <li class="event-item">
+                        <div class="event-date"><i class="fas fa-calendar-day"></i> 14 Iunie 2024</div>
+                        <div class="event-title">Sfârșitul anului școlar</div>
+                        <div class="event-desc">Ceremonia de încheiere a anului școlar</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Orar -->
+    <section class="schedule animated-element" id="orar">
+        <div class="section-title">
+            <h2>Orarul Orelor</h2>
+            <p class="section-subtitle">Programul orelor pentru toate clasele</p>
+        </div>
+        <div class="schedule-container">
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Ora</th>
+                        <th>Luni</th>
+                        <th>Marți</th>
+                        <th>Miercuri</th>
+                        <th>Joi</th>
+                        <th>Vineri</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>8:00-8:50</td>
+                        <td>Matematică</td>
+                        <td>Limba Română</td>
+                        <td>Engleză</td>
+                        <td>Istorie</td>
+                        <td>Fizică</td>
+                    </tr>
+                    <tr>
+                        <td>9:00-9:50</td>
+                        <td>Limba Română</td>
+                        <td>Matematică</td>
+                        <td>Biologie</td>
+                        <td>Engleză</td>
+                        <td>Chimie</td>
+                    </tr>
+                    <tr>
+                        <td>10:00-10:50</td>
+                        <td>Engleză</td>
+                        <td>Geografie</td>
+                        <td>Matematică</td>
+                        <td>Educație Fizică</td>
+                        <td>Informatică</td>
+                    </tr>
+                    <tr>
+                        <td>11:00-11:50</td>
+                        <td>Istorie</td>
+                        <td>Educație Plastică</td>
+                        <td>Limba Română</td>
+                        <td>Matematică</td>
+                        <td>Religie</td>
+                    </tr>
+                    <tr>
+                        <td>12:00-12:50</td>
+                        <td>Educație Muzicală</td>
+                        <td>Informatică</td>
+                        <td>Geografie</td>
+                        <td>Biologie</td>
+                        <td>Consiliere</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Portal Elev/Părinte -->
+    <section class="portal animated-element" id="portal">
+        <div class="section-title">
+            <h2>Portal Elev/Părinte</h2>
+            <p class="section-subtitle">Acces la note, absențe și comunicări</p>
+        </div>
+        <div class="portal-content">
+            <div class="portal-info">
+                <h3>Accesează-ți contul</h3>
+                <p>Portalul Elev/Părinte oferă acces la informații importante despre activitatea școlară:</p>
+                <ul class="portal-features">
+                    <li><i class="fas fa-check"></i> Vizualizare note și situație școlară</li>
+                    <li><i class="fas fa-check"></i> Verificare absențe și motivări</li>
+                    <li><i class="fas fa-check"></i> Comunicări și anunțuri importante</li>
+                    <li><i class="fas fa-check"></i> Materiale de studiu și teme</li>
+                    <li><i class="fas fa-check"></i> Programări la consiliere</li>
+                </ul>
+                <p>Pentru acces la portal, folosește datele de autentificare primite de la școală.</p>
+                <a href="portal.html" class="btn">Accesează portalul</a>
+            </div>
+            <div class="portal-login">
+                <h3>Autentificare</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="username">Nume utilizator</label>
+                        <input type="text" id="username" class="form-control" placeholder="Introdu numele de utilizator">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Parolă</label>
+                        <input type="password" id="password" class="form-control" placeholder="Introdu parola">
+                    </div>
+                    <div class="login-options">
+                        <div class="remember-me">
+                            <input type="checkbox" id="remember">
+                            <label for="remember">Ține-mă minte</label>
+                        </div>
+                        <a href="#" class="forgot-password">Ai uitat parola?</a>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Autentificare <i class="fas fa-sign-in-alt"></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Biblioteca Virtuală -->
+    <section class="library animated-element" id="biblioteca">
+        <div class="section-title">
+            <h2>Biblioteca Virtuală</h2>
+            <p class="section-subtitle">Resurse educaționale și materiale de studiu</p>
+        </div>
+        <div class="library-grid">
+            <div class="library-card">
+                <div class="library-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h3>Manuale Școlare</h3>
+                <p>Manualele aprobate de Ministerul Educației pentru toate disciplinele</p>
+                <a href="biblioteca virtuala.html" class="btn">Accesează</a>
+            </div>
+            <div class="library-card">
+                <div class="library-icon">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <h3>Materiale Suport</h3>
+                <p>Fișe de lucru, teste și materiale suplimentare pentru studiu</p>
+                <a href="biblioteca virtuala.html" class="btn">Accesează</a>
+            </div>
+            <div class="library-card">
+                <div class="library-icon">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h3>Resurse Video</h3>
+                <p>Lecții video și prezentări interactive pentru învățare</p>
+                <a href="biblioteca virtuala.html" class="btn">Accesează</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-wave">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+        <div class="footer-content">
+            <div class="footer-column">
+                <div class="footer-logo">Gimnaziul <span>Oxentea</span></div>
+                <div class="footer-about">
+                    <p>O instituție de învățământ dedicată excelenței în educație, formarea tinerilor și dezvoltarea comunității.</p>
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Link-uri rapide</h3>
+                <ul class="footer-links">
+                    <li><a href="Gimnaziul Oxentea nr.2.html"><i class="fas fa-chevron-right"></i> Acasă</a></li>
+                    <li><a href="Gimnaziul Oxentea nr.2.html#despre"><i class="fas fa-chevron-right"></i> Despre noi</a></li>
+                    <li><a href="Gimnaziul Oxentea nr.2.htmloferta"><i class="fas fa-chevron-right"></i> Oferta educațională</a></li>
+                    <li><a href="Gimnaziul Oxentea nr.2.html#profesori"><i class="fas fa-chevron-right"></i> Profesori</a></li>
+                    <li><a href="Gimnaziul Oxentea nr.2.html#activitati"><i class="fas fa-chevron-right"></i> Activități</a></li>
+                    <li><a href="profesori.html"><i class="fas fa-chalkboard-teacher"></i> Profesori</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Resurse</h3>
+                <ul class="footer-links">
+                    <li><a href="#documente"><i class="fas fa-chevron-right"></i> Documente școlare</a></li>
+                    <li><a href="#calendar"><i class="fas fa-chevron-right"></i> Calendar școlar</a></li>
+                    <li><a href="#orar"><i class="fas fa-chevron-right"></i> Orarul orelor</a></li>
+                    <li><a href="portal.html"><i class="fas fa-chevron-right"></i> Portal elev/părinte</a></li>
+                    <li><a href="biblioteca virtuala.html"><i class="fas fa-chevron-right"></i> Biblioteca virtuală</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <div class="footer-about">
+                    <p>Strada Principală, nr. 123, Oxentea</p>
+                    <p>Telefon: +40 123 456 789</p>
+                    <p>Email: contact@gimnaziuloxentea.ro</p>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 Gimnaziul Oxentea. Toate drepturile rezervate.
+        </div>
+    </footer>
+
+    <!-- Buton scroll to top -->
+    <div class="scroll-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <script>
+        // Animare la scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.animated-element');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Buton scroll to top
+            const scrollToTopBtn = document.querySelector('.scroll-to-top');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.add('active');
+                } else {
+                    scrollToTopBtn.classList.remove('active');
+                }
+            });
+            
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Navigație smooth
+            document.querySelectorAll('nav a, .footer-links a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    if (this.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        
+                        const targetId = this.getAttribute('href');
+                        const targetElement = document.querySelector(targetId);
+                        
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                            
+                            // Închidem meniul mobil dacă este deschis
+                            if (window.innerWidth <= 768) {
+                                document.querySelector('nav ul').classList.remove('active');
+                            }
+                        }
+                    }
+                });
+            });
+            
+            // Meniu mobil
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navMenu = document.querySelector('nav ul');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                mobileMenuBtn.innerHTML = navMenu.classList.contains('active') ? 
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Butoane de descărcare
+            const downloadButtons = document.querySelectorAll('.download-btn');
+            downloadButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Pentru demo, doar afișăm un mesaj
+                    alert('Descărcarea a început! Într-o implementare reală, fișierul s-ar descărca.');
+                });
+            });
+            
+            // Formular de autentificare
+            const loginForm = document.querySelector('.portal-login form');
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Autentificare reușită! Într-o implementare reală, ați fi redirecționat către portal.');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
